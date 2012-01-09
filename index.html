@@ -1,0 +1,131 @@
+<!doctype html>
+
+<html
+  <head>
+    <style>
+      .grey-button {
+        padding:.5em;
+        text-decoration:none;
+      }
+      
+      .grey-button-inactive {
+        background-color:#EEE;
+        border:1px solid #CCC;
+        color:#999;
+      }
+      
+      a.grey-button:hover, .grey-button-active {
+        background-color:#DDD;
+        color:#333;
+        border:1px solid #AAA;
+      }
+      
+      .list-item-button {
+        padding:.5em 1em;
+        display:block;
+        background-color:#F9F9F9;
+        border:1px solid #F0F0F0;
+      }
+      
+      a.list-item-button:hover {
+        background-color:#F3F3F3;
+      }
+      
+      .item-list {
+        list-style-type: none;
+        width:15em;
+        padding-left:0;
+      }
+    </style>
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="lawnchair-0.6.1.js"></script>
+  </head>
+  <body>
+    <h1>OpenHDS</h1>
+    <h2>Update Round</h2>
+    <div id="loadingIndicatorDialog" style="position:absolute;top:0;left:40%;font-size:1.1em;background-color:#EFEFEF;border:1px solid #E3E3E3;">
+      <table cellspacing=0 cellpadding=0 border=0>
+        <tr>
+          <td><img src="ajax-loader.gif"></td>
+          <td><span id="loadingMsgLbl">Retrieving all Locations</span></td>
+        </tr>
+      </table>
+    </div>
+    <div style="position:absolute;top:0;right:0;padding:1em;background-color:#F5F5F5;border:1px solid #EBEBEB">
+      <strong>Status</strong>: <span id="onlineStatusLbl">Online</span>
+      <br />
+      <a href="#" id="clearStorageBtn">Clear Local Storage</a>
+    </div>
+    
+    <div id="needDataDialog">
+      You do not have any local data. You will need to fetch data before this application can go offline.
+      <br />
+      <button id="retrieveBaseData">Get Data Now</button>
+    </div>
+    <div id="applicationPane" style="display:none">
+      <form id="targetLocationForm">
+        <h3>Select target Locations</h3>
+        <table cellspacing=0 cellpadding=0 border=0>
+          <tbody id="targetLocationTableBody">
+          </tbody>
+        </table>
+        <button id="selectTargetLocations">Select Locations</button>
+        <div style="color:red" id="selectedTargetErrorLbl"></div>
+      </form>
+      
+      <form id="selectLocationForm" style="display:none">
+        <h3>Location</h3>
+        <p>
+          Select Location:
+          <br />
+          <ul class="item-list" id="locationList"></ul>
+        </p>
+      </form>
+      
+      <form id="eventSelectionForm" style="display:none">
+        <h3>Select Event</h3>
+        <ul class="item-list" id="eventList">
+          <li><a href="#" class="list-item-button" id="deathEventBtn">Death Event</a></li>
+        </ul>
+      </form>
+      
+      <form id="registerDeathForm" style="display:none;">
+        <h3>Death Registration Form</h3>
+        <p>
+          Individual Id:
+          <br />
+          <input type="text" />
+        </p>
+        <p>
+          Date of Death:
+          <br />
+          <input type="text" />
+        </p>
+        <p>
+          Cause of Death:
+          <br />
+          <input type="text" />
+        </p>
+        <p>
+          Place of Death:
+          <br />
+          <input type="text" />
+        </p>
+        <p>
+          Visit Id:
+          <br />
+          <input type="text" />
+        </p>
+        <button id="deathRegisterSubmitBtn">Complete Death Registration</button>
+        <button class="cancel-event">Cancel</button>
+      </form>
+    </div>
+    <script type="text/javascript" src="application.js"></script>
+    <script type="text/javascript" src="application-view.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        openhdsContext.app.init();
+      });    
+    </script>
+  </body>
+</html>

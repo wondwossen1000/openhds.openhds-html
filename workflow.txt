@@ -1,0 +1,26 @@
+1. Fetch all Locations from server
+-- If no network connection
+---- Warn user that no connection established
+---- If local storage has previously saved target locations and they have individuals
+------ Jump to step 4
+---- If local storage is empty
+------ Display a refresh button and do not go any further till connection established
+------ When the connection has been established, jump to step 2
+2. Display the locations to user
+2a. User selects the locations they will visit
+2b. User submits back the form with target locations
+3. Locally store the selected locations
+3a. Send request to server to get all individuals at target location
+-- If no network connection
+---- Warn user no network connection was established
+---- Show a refresh button and do no go any further till connection established
+---- When connection has been established, jump to 4
+4. User then selects a location from list of target locations
+5. User then creates/selects a visit for the location
+6. User selects an event that occurred
+7. User selects an individual (if applicable)
+8. User saves event
+8a. Save event to local storage
+9. User optionally selects another event
+-- If user chooses another event, jump back to step 7
+10. User completes visit
